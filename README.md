@@ -1,11 +1,6 @@
 # Microservices with Vaadin demo application
 
-## Run postgresql
-Ensure that postgresql-10 is running. Create user demo with password 'demo'. Create database 'demo' with owner demo.
-
-*postgresql is required during tests execution as well*
-
-## Building the demo
+## Build the app
 
 Run the following from the command line:
 ```
@@ -15,6 +10,8 @@ mvn clean install
 ```
 
 ## Running the app/services
+
+Ensure that postgresql-10 is running. Create user demo with password 'demo'. Create database 'demo' with owner demo.
 
 Use multiple terminals to perform the following steps:
 
