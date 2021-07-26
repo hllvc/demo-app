@@ -4,7 +4,7 @@
 
 Run the following from the command line:
 ```
-git clone https://github.com/momerkic/demo-app.git
+git clone https://github.com/darkokojovic-abh/demo-app.git
 cd demo-app
 mvn clean install
 ```
