@@ -1,0 +1,37 @@
+services:
+
+  postgres:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_USER=demo
+      - POSTGRES_PASSWORD=demo
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  biz:
+    image: biz-application
+    ports:
+      - "9001:9001"
+    depends_on:
+      - postgres
+
+  admin:
+    image: admin-application
+    ports:
+      - "9101:9101"
+
+  news:
+    image: news-application
+    ports:
+      - "9201:9201"
+
+  website:
+    image: website-application
+    ports:
+      - "9301:9301"
+
+volumes:
+  postgres_data:
+    name: postgres_data
