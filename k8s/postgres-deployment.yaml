@@ -27,10 +27,10 @@ spec:
               value: demo
           volumeMounts:
             - mountPath: /var/lib/postgres/data
-              name: postgres-data
+              name: postgres-pv-data
           ports:
             - containerPort: 5432
       volumes:
-        - name: postgres-data
-          hostPath:
-            path: /var/lib/postgres/data
+        - name: postgres-pv-data
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim

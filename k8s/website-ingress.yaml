@@ -17,3 +17,24 @@ spec:
                 name: website
                 port:
                   number: 9301
+    - host: admin.demo-app.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: admin
+                port:
+                  number: 9101
+    - host: news.demo-app.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: news
+                port:
+                  number: 9201
+
