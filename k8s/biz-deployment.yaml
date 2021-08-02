@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: biz-deployment
+  namespace: demo-app
+  labels:
+    app: demo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-app
+      type: biz
+  template:
+    metadata:
+      labels:
+        app: demo-app
+        type: biz
+    spec:
+      containers:
+        - name: biz
+          image: hllvc/demo-app:biz-0.0.1
+          ports:
+            - containerPort: 9001
+          imagePullPolicy: Always

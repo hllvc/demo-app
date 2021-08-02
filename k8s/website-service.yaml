@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: website
+  namespace: demo-app
+  labels:
+    app: demo-app
+spec:
+  selector:
+    app: demo-app
+    type: website
+  ports:
+    - port: 9301
+      targetPort: 9301
