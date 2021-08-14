@@ -1,0 +1,5 @@
+FROM openjdk:11-jre-slim
+WORKDIR /app
+EXPOSE 9101
+CMD [ "java", "-jar", "admin-application-0.0.1-SNAPSHOT.jar" ]
+COPY admin-application-0.0.1-SNAPSHOT.jar /app

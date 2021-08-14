@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin-deployment
+  namespace: demo-app
+  labels:
+    app: demo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-app
+      type: admin
+  template:
+    metadata:
+      labels:
+        app: demo-app
+        type: admin
+    spec:
+      containers:
+        - name: admin
+          image: hllvc/demo-app:admin-0.0.1
+          ports:
+            - containerPort: 9101
+          imagePullPolicy: Always

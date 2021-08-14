@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website-deployment
+  namespace: demo-app
+  labels:
+    app: demo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-app
+      type: website
+  template:
+    metadata:
+      labels:
+        app: demo-app
+        type: website
+    spec:
+      containers:
+        - name: website
+          image: hllvc/demo-app:website-0.0.1
+          ports:
+            - containerPort: 9301
+          imagePullPolicy: Always

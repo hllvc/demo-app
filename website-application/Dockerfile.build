@@ -1,0 +1,5 @@
+FROM maven:alpine
+WORKDIR /build
+CMD [ "./build.sh" ]
+RUN apk add git --no-cache
+COPY build.sh /build
