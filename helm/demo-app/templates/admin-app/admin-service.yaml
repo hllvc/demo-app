@@ -1,0 +1,16 @@
+{{- if .Values.service.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.admin.service.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: demo-app
+spec:
+  selector:
+    app: demo-app
+    type: admin
+  ports:
+    - port: {{ .Values.admin.port | int }}
+      targetPort: {{ .Values.admin.port | int }}
+{{- end }}

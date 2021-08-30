@@ -1,0 +1,61 @@
+namespace: demo-app
+
+admin:
+  replicaCount: 1
+  image: hllvc/demo-app
+  tag: admin-0.0.1
+  port: 9101
+  pullPolicy: Always
+  service:
+    enabled: true
+    name: admin
+
+news:
+  replicaCount: 1
+  image: hllvc/demo-app
+  tag: news-0.0.1
+  port: 9201
+  pullPolicy: Always
+  service:
+    enabled: true
+    name: news
+
+biz:
+  replicaCount: 1
+  image: hllvc/demo-app
+  tag: biz-0.0.1
+  port: 9001
+  pullPolicy: Always
+  service:
+    enabled: true
+    name: biz
+
+website:
+  replicaCount: 1
+  image: hllvc/demo-app
+  tag: website-0.0.1
+  port: 9301
+  pullPolicy: Always
+  service:
+    enabled: true
+    name: website
+  ingress:
+    enabled: true
+    root: /ui
+    host: demo-app.com
+
+database:
+  replicaCount: 1
+  image: postgres
+  tag: alpine
+  env:
+    user: demo
+    pass: demo
+  port: 5432
+  volume:
+    claim: postgres-pv-claim
+    size: 20Gi
+    path: /mnt/data
+  service:
+    enabled: true
+    name: postgres

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin-deployment
+  namespace: demo-app
+  labels:
+    app: demo-app
+spec:
+  replicas: {{ .Values.admin.replicaCount | int }}
+  selector:
+    matchLabels:
+      app: demo-app
+      type: admin
+  template:
+    metadata:
+      labels:
+        app: demo-app
+        type: admin
+    spec:
+      containers:
+        - name: admin
+          image: {{ .Values.admin.image }}:{{ .Values.image.tag }}
+          ports:
+            - containerPort: {{ .Values.admin.port | int }}
+          imagePullPolicy: {{ .Values.admin.pullPolicy }}

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: demo-app
+spec:
+  replicas: {{ .Values.database.replicaCount | int }}
+  selector:
+    matchLabels:
+      app: demo-app
+      type: db
+  template:
+    metadata:
+      labels:
+        app: demo-app
+        type: db
+    spec:
+      containers:
+        - name: postgres
+          image: {{ .Values.database.image }}:{{ .Values.database.tag }}
+          env:
+            - name: POSTGRES_USER
+              value: {{ .Values.database.env.user }}
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.database.env.pass }}
+          volumeMounts:
+            - mountPath: /var/lib/postgres/data
+              name: postgres-pv-data
+          ports:
+            - containerPort: {{ .Values.database.port }}
+      volumes:
+        - name: postgres-pv-data
+          persistentVolumeClaim:
+            claimName: {{ .Values.database.volume.claim }}

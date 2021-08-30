@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website-deployment
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: demo-app
+spec:
+  replicas: {{ .Values.website.replicaCount | int }}
+  selector:
+    matchLabels:
+      app: demo-app
+      type: website
+  template:
+    metadata:
+      labels:
+        app: demo-app
+        type: website
+    spec:
+      containers:
+        - name: website
+          image: {{ .Values.website.image }}:{{ .Values.website.tag }}
+          ports:
+            - containerPort: {{ .Values.website.port | int }}
+          imagePullPolicy: {{ .Values.website.pullPolicy }}

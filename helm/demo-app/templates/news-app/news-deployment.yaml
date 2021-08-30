@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.namespace }}
+  namespace: demo-app
+  labels:
+    app: demo-app
+spec:
+  replicas: {{ .Values.news.replicaCount | int }}
+  selector:
+    matchLabels:
+      app: demo-app
+      type: news
+  template:
+    metadata:
+      labels:
+        app: demo-app
+        type: news
+    spec:
+      containers:
+        - name: news
+          image: {{ .Values.news.image }}:{{ .Values.news.tag }}
+          ports:
+            - containerPort: {{ .Values.news.port | int }}
+          imagePullPolicy: {{ .Values.news.pullPolicy }}

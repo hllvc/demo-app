@@ -1,0 +1,16 @@
+{{- if .Values.news.service.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.news.service.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: demo-app
+spec:
+  selector:
+    app: demo-app
+    type: news
+  ports:
+    - port: {{ .Values.news.port | int }}
+      targetPort: {{ .Values.news.port | int }}
+{{- end }}

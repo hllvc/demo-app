@@ -1,0 +1,52 @@
+{{- if .Values.biz.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: website-ingress
+  namespace: {{ .Values.namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/app-root: {{ .Values.website.ingress.root }}
+spec:
+  rules:
+    - host: {{ .Values.website.ingress.host }}
+      http:
+        paths:
+          - path: /admin
+            backend:
+              service:
+                name: {{ .Values.admin.service.name }}
+                port:
+                  number: 9101
+          - path: /news
+            backend:
+              service:
+                name: {{ .Values.news.service.name }}
+                port:
+                  number: 9201
+          - path: /*
+            backend:
+              service:
+                name: {{ .Values.website.service.name }}
+                port:
+                  number: 9301
+    # - host: admin.demo-app.com
+    #   http:
+    #     paths:
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: admin
+    #             port:
+    #               number: 9101
+    # - host: news.demo-app.com
+    #   http:
+    #     paths:
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: news
+    #             port:
+    #               number: 9201
+{{- end }}
